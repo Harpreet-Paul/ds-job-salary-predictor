@@ -24,17 +24,23 @@ def scrape_glassdoor_company_info(company_names):
     #options.add_argument("--headless")
     #options.add_argument('window-size=1920x1080')
     #options.add_argument('--proxy-server=%s' % PROXYVAR)
-    wd = webdriver.Chrome(executable_path="/Users/isabellanguyen/predicting ds job salaries/chromedriver", options=options)
+    wd = webdriver.Chrome(executable_path="/Users/isabellanguyen/GitHub/ds_salary_proj/predicting ds job salaries/chromedriver", options=options)
 
     wd.get('https://www.glassdoor.ca/Reviews/index.htm')
+    time.sleep(7)
     wd.find_element_by_link_text('Sign In').click()
+    time.sleep(5)
     wd.find_element_by_name("username").send_keys('harpreet.s.paul@outlook.com')
+    time.sleep(2)
     wd.find_element_by_name("password").send_keys('happy23!')
+    time.sleep(2)
     wd.find_element_by_name("submit").click()
     
     i = 1
 
     for company in company_names:
+        
+        time.sleep(10)
         
         company_info = {}
     
@@ -48,11 +54,15 @@ def scrape_glassdoor_company_info(company_names):
             
         try:
             company_name_search_box = WebDriverWait(wd, 20).until(EC.presence_of_element_located((By.ID, "sc.keyword")))
+            time.sleep(2)
             company_name_search_box.clear()
+            time.sleep(2)
             company_name_search_box.send_keys(company)
         except:
             company_name_search_box = WebDriverWait(wd, 20).until(EC.presence_of_element_located((By.NAME, "sc.keyword")))
+            time.sleep(2)
             company_name_search_box.clear()
+            time.sleep(2)
             company_name_search_box.send_keys(company)
             
                
@@ -62,11 +72,13 @@ def scrape_glassdoor_company_info(company_names):
         
         try:
             location_search_box = wd.find_element_by_xpath("//*[@id='sc.location']")
+            time.sleep(2)
             location_search_box.clear()
         except:
             pass
         
         search_button = wd.find_element_by_xpath('//*[@id="scBar"]/div/button')
+        time.sleep(2)
         search_button.click() 
     
         if wd.current_url.startswith('https://www.glassdoor.ca/Reviews'):
@@ -74,6 +86,7 @@ def scrape_glassdoor_company_info(company_names):
             try:
                 first_search_result = WebDriverWait(wd, 5).until(EC.presence_of_element_located((By.XPATH, '//div[@class = "single-company-result module "][1]//a[1]')))
                 link = first_search_result.get_attribute('href')
+                time.sleep(3)
                 wd.get(link)
         
             except:
@@ -87,30 +100,40 @@ def scrape_glassdoor_company_info(company_names):
             company_info['headquarters'] = headquarters
         except:
             company_info['headquarters'] = -1
+            
+        time.sleep(2)
         
         try:
             company_size = wd.find_element_by_xpath('//div[@class="infoEntity"][3]/span').text
             company_info['company_size'] = company_size
         except:
             company_info['company_size'] = -1
+        
+        time.sleep(2)
     
         try:
             company_type = wd.find_element_by_xpath('//div[@class="infoEntity"][5]/span').text
             company_info['company_type'] = company_type
         except:
             company_info['company_type'] = -1
+            
+        time.sleep(2)
     
         try:
             industry = wd.find_element_by_xpath('//div[@class="infoEntity"][6]/span').text
             company_info['industry'] = industry
         except:
             company_info['industry'] = -1
+            
+        time.sleep(2)
     
         try:
             revenue = wd.find_element_by_xpath('//div[@class="infoEntity"][7]/span').text
             company_info['revenue'] = revenue
         except:
             company_info['revenue'] = -1
+            
+        time.sleep(2)
     
         try:
             company_rating = wd.find_element_by_xpath('//*[@id="EmpStats"]/div/div[1]/div/div/div').text
@@ -118,11 +141,15 @@ def scrape_glassdoor_company_info(company_names):
         except:
             company_info['company_rating'] = -1
     
+        time.sleep(2)
+    
         try:
             recommend_to_a_friend = wd.find_element_by_id("EmpStats_Recommend").get_attribute('data-percentage')
             company_info['recommend_to_a_friend'] = recommend_to_a_friend
         except:
             company_info['recommend_to_a_friend'] = -1
+        
+        time.sleep(2)
         
         try:
             ceo_approval = wd.find_element_by_id("EmpStats_Approve").get_attribute('data-percentage')
@@ -130,6 +157,8 @@ def scrape_glassdoor_company_info(company_names):
         except:
             company_info['ceo_approval'] = -1
     
+        time.sleep(2)
+        
         try:
             interview_difficulty = wd.find_element_by_class_name('difficultyLabel').text
             company_info['interview_difficulty'] = interview_difficulty
