@@ -24,7 +24,7 @@ def scrape_glassdoor_company_info(company_names):
     #options.add_argument("--headless")
     #options.add_argument('window-size=1920x1080')
     #options.add_argument('--proxy-server=%s' % PROXYVAR)
-    wd = webdriver.Chrome(executable_path="/Users/isabellanguyen/GitHub/ds_salary_proj/predicting ds job salaries/chromedriver", options=options)
+    wd = webdriver.Chrome(executable_path="C:/Users/harpr/Documents/GitHub/ds_salary_proj/predicting ds job salaries/chromedriver", options=options)
 
     wd.get('https://www.glassdoor.ca/Reviews/index.htm')
     time.sleep(7)
@@ -95,45 +95,46 @@ def scrape_glassdoor_company_info(company_names):
         
         company_info['company'] = company
     
-        try:
-            headquarters = wd.find_element_by_xpath('//div[@class="infoEntity"][2]/span').text
-            company_info['headquarters'] = headquarters
-        except:
-            company_info['headquarters'] = -1
+        #try:
+            #headquarters = wd.find_element_by_xpath('//div[@class="infoEntity"][2]/span').text
+            #company_info['headquarters'] = headquarters
+        #except:
+            #company_info['headquarters'] = -1
             
-        time.sleep(2)
+        #time.sleep(2)
         
-        try:
-            company_size = wd.find_element_by_xpath('//div[@class="infoEntity"][3]/span').text
-            company_info['company_size'] = company_size
-        except:
-            company_info['company_size'] = -1
+        #try:
+            #company_size = wd.find_element_by_xpath('//div[@class="infoEntity"][3]/span').text
+            #company_info['company_size'] = company_size
+        #except:
+            #company_info['company_size'] = -1
         
-        time.sleep(2)
+        #time.sleep(2)
     
-        try:
-            company_type = wd.find_element_by_xpath('//div[@class="infoEntity"][5]/span').text
-            company_info['company_type'] = company_type
-        except:
-            company_info['company_type'] = -1
+        #try:
+            #company_type = wd.find_element_by_xpath('//div[@class="infoEntity"][5]/span').text
+            #company_info['company_type'] = company_type
+        #except:
+            #company_info['company_type'] = -1
             
-        time.sleep(2)
+        #time.sleep(2)
     
-        try:
-            industry = wd.find_element_by_xpath('//div[@class="infoEntity"][6]/span').text
-            company_info['industry'] = industry
-        except:
-            company_info['industry'] = -1
+        #try:
+            #industry = wd.find_element_by_xpath('//div[@class="infoEntity"][6]/span').text
+            #company_info['industry'] = industry
+        #except:
+            #company_info['industry'] = -1
             
-        time.sleep(2)
+        #time.sleep(2)
     
-        try:
-            revenue = wd.find_element_by_xpath('//div[@class="infoEntity"][7]/span').text
-            company_info['revenue'] = revenue
-        except:
-            company_info['revenue'] = -1
+        #try:
+            #revenue = wd.find_element_by_xpath('//div[@class="infoEntity"][8]/span').text
+            #revenue = wd.find_element_by_xpath('//div[@class="infoEntity"][7]/span').text
+            #company_info['revenue'] = revenue
+        #except:
+            #company_info['revenue'] = -1
             
-        time.sleep(2)
+        #time.sleep(2)
     
         try:
             company_rating = wd.find_element_by_xpath('//*[@id="EmpStats"]/div/div[1]/div/div/div').text
