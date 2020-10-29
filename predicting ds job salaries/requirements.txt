@@ -1,0 +1,6 @@
+# List of dependencies to be pip installed on the google cloud virtual machine. 
+
+pandas
+numpy
+flask
+gunicorn

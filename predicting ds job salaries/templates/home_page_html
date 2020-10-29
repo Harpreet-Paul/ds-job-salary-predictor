@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="generator" content="RocketCake">
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='home_page.css')}}">
+</head>
+<body>
+<div class="textstyle1">
+  <div id="container_54a1c552">
+    <div id="container_54a1c552_padding" >
+      <div class="textstyle2">
+<h1 id="heading_46617e6a"> Data Science Job Salary Predictor</h1>        </div>
+      <div class="textstyle1">
+        <form  action=""
+enctype="application/x-www-form-urlencoded"
+method="POST" id="form_5f0116bc">
+          <div id="form_5f0116bc_padding" >
+            <div class="textstyle1">
+              <span class="textstyle3">Please fill in the following fields to get a salary estimate on a job posting.<br/><br/>1. Job Description<br/>Copy and paste the job description here. </span>
+<input type="text" value="" title="" name="description"  placeholder="Paste a job description..." required="required"  id="edit_4081172c" >
+<span class="textstyle3"><br/><br/>2. Company Size</span><span class="textstyle3"><br/>Find the company size from Glassdoor, Linkedin or Indeed. </span><select name="company_size" title=""  id="combo_3dae042d" >
+<option value="1 to 50 employees">1 to 50 employees</option>
+<option value="51 to 200 employees">51 to 200 employees</option>
+<option value="201 to 500 employees">201 to 500 employees</option>
+<option value="501 to 1000 employees">501 to 1000 employees</option>
+<option value="1001 to 5000 employees">1001 to 5000 employees</option>
+<option value="5001 to 10000 employees">5001 to 10000 employees</option>
+<option value="10000+ employees">10000+ employees</option>
+<option value="Unknown">Unknown</option>
+<option value="company size" selected="selected">company size</option>
+</select>
+              <span class="textstyle3"><br/><br/>3. Company Type<br/>Find the company type from Glassdoor, Linkedin or Indeed. </span>
+<select name="company_type" title=""  id="combo_64f37254" >
+<option value="Private">Private</option>
+<option value="Public">Public</option>
+<option value="College / University">College / University</option>
+<option value="Subsidiary or Business Segment">Subsidiary or Business Segment</option>
+<option value="Government">Government</option>
+<option value="Non-profit Organisation">Non-profit Organisation</option>
+<option value="Hospital">Hospital</option>
+<option value="Other">Other</option>
+<option value="Unknown">Unknown</option>
+<option value="company type" selected="selected">company type</option>
+</select>
+              <span class="textstyle3"><br/></span>
+<input type="text" value="{{prediction}}" title="" name="TextEdit1"  placeholder="Salary Prediction" readonly="readonly"  id="edit_2c509ff5" >
+              <span class="textstyle3"><br/>4. Company Industry<br/>Find the industry from Glassdoor, Linkedin or Indeed. </span>
+<select name="industry" title=""  id="combo_3f14847d" >
+<option value="Accounting">Accounting</option>
+<option value="Advertising & Marketing">Advertising & Marketing</option>
+<option value="Aerospace & Defence">Aerospace & Defence</option>
+<option value="Architectural & Engineering Services">Architectural & Engineering Services</option>
+<option value="Banks & Building Societies">Banks & Building Societies</option>
+<option value="Biotech & Pharmaceuticals">Biotech & Pharmaceuticals</option>
+<option value="Chemical Manufacturing">Chemical Manufacturing</option>
+<option value="Colleges & Universities">Colleges & Universities</option>
+<option value="Computer Hardware & Software">Computer Hardware & Software</option>
+<option value="Consulting">Consulting</option>
+<option value="Consumer Product Hire">Consumer Product Hire</option>
+<option value="Consumer Products Manufacturing">Consumer Products Manufacturing</option>
+<option value="Department, Clothing, & Shoe Shops">Department, Clothing, & Shoe Shops</option>
+<option value="Education Training Services">Education Training Services</option>
+<option value="Energy">Energy</option>
+<option value="Enterprise Software & Network Solutions">Enterprise Software & Network Solutions</option>
+<option value="Express Delivery Services">Express Delivery Services</option>
+<option value="Food & Drink Manufacturing">Food & Drink Manufacturing</option>
+<option value="General Merchandise & Superstores">General Merchandise & Superstores</option>
+<option value="Government Agencies">Government Agencies</option>
+<option value="Grocery Shops & Supermarkets">Grocery Shops & Supermarkets</option>
+<option value="Health Charities">Health Charities</option>
+<option value="Health, Beauty & Fitness">Health, Beauty & Fitness</option>
+<option value="Healthcare Services & Hospitals">Healthcare Services & Hospitals</option>
+<option value="IT Services">IT Services</option>
+<option value="Industrial Manufacturing">Industrial Manufacturing</option>
+<option value="Insurance Operators">Insurance Operators</option>
+<option value="Internet">Internet</option>
+<option value="Investment Banking & Asset Management">Investment Banking & Asset Management</option>
+<option value="Legal">Legal</option>
+<option value="Lending">Lending</option>
+<option value="Logistics & Supply Chain">Logistics & Supply Chain</option>
+<option value="Mining">Mining</option>
+<option value="Miscellaneous Manufacturing">Miscellaneous Manufacturing</option>
+<option value="News Outlets">News Outlets</option>
+<option value="Other Retail Shops">Other Retail Shops</option>
+<option value="Pet & Pet Supply Shops">Pet & Pet Supply Shops</option>
+<option value="Pharmacies & Health Shops">Pharmacies & Health Shops</option>
+<option value="Regional & County Councils">Regional & County Councils</option>
+<option value="Research & Development">Research & Development</option>
+<option value="Social Services">Social Services</option>
+<option value="Staffing & Outsourcing">Staffing & Outsourcing</option>
+<option value="Telecommunications Services">Telecommunications Services</option>
+<option value="Transportation Equipment Manufacturing">Transportation Equipment Manufacturing</option>
+<option value="Transportation Management">Transportation Management</option>
+<option value="Utilities">Utilities</option>
+<option value="Vehicle Dealers">Vehicle Dealers</option>
+<option value="Video Games">Video Games</option>
+<option value="Other">Other</option>
+<option value="Unknown">Unknown</option>
+<option value="company industry" selected="selected">company industry</option>
+</select>
+              <span class="textstyle3"><br/><br/>5. Company Revenue<br/>Find the company revenue from Glassdoor or Indeed. </span>
+<select name="revenue" title=""  id="combo_552b321a" >
+<option value="Less than $1 million (CAD) per year">Less than $1 million (CAD) per year</option>
+<option value="$1 to $5 million (CAD) per year">$1 to $5 million (CAD) per year</option>
+<option value="$5 to $10 million (CAD) per year">$5 to $10 million (CAD) per year</option>
+<option value="$10 to $25 million (CAD) per year">$10 to $25 million (CAD) per year</option>
+<option value="$25 to $50 million (CAD) per year">$25 to $50 million (CAD) per year</option>
+<option value="$50 to $100 million (CAD) per year">$50 to $100 million (CAD) per year</option>
+<option value="$100 to $500 million (CAD) per year">$100 to $500 million (CAD) per year</option>
+<option value="$500 million to $1 billion (CAD) per year">$500 million to $1 billion (CAD) per year</option>
+<option value="$1 to $2 billion (CAD) per year">$1 to $2 billion (CAD) per year</option>
+<option value="$2 to $5 billion (CAD) per year">$2 to $5 billion (CAD) per year</option>
+<option value="$5 to $10 billion (CAD) per year">$5 to $10 billion (CAD) per year</option>
+<option value="$10+ billion (CAD) per year">$10+ billion (CAD) per year</option>
+<option value="Unknown">Unknown</option>
+<option value="company revenue" selected="selected">company revenue</option>
+</select>
+              <span class="textstyle3"><br/><br/>6. Company Rating<br/>Find the company rating from Glassdoor only. Enter a value between 0 and 5. </span>
+<input type="number" value="" title="" name="company_rating"  placeholder="Enter a company rating..." required="required" min="0" max="5" step="0.1"  id="edit_21c46e0d" >
+              <span class="textstyle3"> Enter </span>
+              <span class="textstyle4">3.9</span>
+              <span class="textstyle3"> if rating is unknown. <br/><br/>7. Recommend to a Friend<br/>Find the recommend to a friend rating from Glassdoor only.  Enter a value between 0 and 100. </span>
+<input type="number" value="" title="" name="recommend_to_a_friend"  placeholder="Enter a recommend to a friend rating..." required="required" min="0" max="100" step="1"  id="edit_33e818a" >
+              <span class="textstyle3"> Enter </span>
+              <span class="textstyle4">77</span>
+              <span class="textstyle3"> if rating is unknown. <br/><br/>8. CEO Approval<br/>Find the CEO approval rating from Glassdoor only. Enter a value between 0 and 100.  </span>
+<input type="number" value="" title="" name="ceo_approval"  placeholder="Enter a CEO approval rating..." required="required" min="0" max="100" step="1"  id="edit_325f9d76" >
+              <span class="textstyle3"> Enter </span>
+              <span class="textstyle4">86</span>
+              <span class="textstyle3"> if rating is unknown. <br/><br/>9. Interview Difficulty<br/>Find the interview difficulty rating from Glassdoor only. Enter a value between 0 and 5. </span>
+<input type="number" value="" title="" name="interview_difficulty"  placeholder="Enter an interview difficulty rating..." required="required" min="0" max="5" step="0.1"  id="edit_6e2ba9d9" >
+              <span class="textstyle3"> Enter </span>
+              <span class="textstyle4">2.8</span>
+<span class="textstyle3"> if rating is unknown. <br/></span><span class="textstyle5"><br/></span><span class="textstyle3">10. Job Location<br/>Select a location from the follwing list of US states, Canadian provinces and England/Scotland/Ireland.</span><select name="location_bin" title=""  id="combo_4cd541dc" >
+<option value="job location" selected="selected">job location</option>
+<option value="AZ">AZ</option>
+<option value="BC">BC</option>
+<option value="CA">CA</option>
+<option value="CO">CO</option>
+<option value="D.C.">D.C.</option>
+<option value="England">England</option>
+<option value="GA">GA</option>
+<option value="IL">IL</option>
+<option value="Ireland">Ireland</option>
+<option value="MA">MA</option>
+<option value="MD">MD</option>
+<option value="MI">MI</option>
+<option value="NC">NC</option>
+<option value="NJ">NJ</option>
+<option value="NY">NY</option>
+<option value="ON">ON</option>
+<option value="OR">OR</option>
+<option value="QC">QC</option>
+<option value="Scotland">Scotland</option>
+<option value="TX">TX</option>
+<option value="VA">VA</option>
+<option value="WA">WA</option>
+<option value="">Other</option>
+</select>
+              <span class="textstyle5"> </span>
+              <span class="textstyle6"><br/><br/></span>
+<input name="Button1" type="submit" value="Submit" title=""  id="button_e6feb80" >
+              </div>
+            <div style="clear:both"></div>
+            </div>
+          </form>
+        </div>
+      <div style="clear:both"></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
