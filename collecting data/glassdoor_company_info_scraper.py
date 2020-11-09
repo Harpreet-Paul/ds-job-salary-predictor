@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
+
 
 
 from selenium import webdriver
@@ -13,23 +13,31 @@ import pandas as pd
 import time
 
 
-# In[ ]:
 
+## Scraping glassdoor company info for a list of companies, given by the company_names variable. 
 
 def scrape_glassdoor_company_info(company_names):
     
+    ## Initializing empty list to which company info for each comany will be appended. 
+    
     all_companies_info = []
+    
+    ## Initializing the webdriver. 
 
     options = webdriver.ChromeOptions()
-    #options.add_argument("--headless")
-    #options.add_argument('window-size=1920x1080')
-    #options.add_argument('--proxy-server=%s' % PROXYVAR)
-    wd = webdriver.Chrome(executable_path="C:/Users/harpr/Documents/GitHub/ds_salary_proj/predicting ds job salaries/chromedriver", options=options)
+    wd = webdriver.Chrome(executable_path="C:/Users/harpr/Documents/GitHub/ds_salary_proj/data scrapers/chromedriver.exe", options=options)
 
+    ## Telling the webdriver to navigate to the Glassdoor company reviews home page. 
+    
     wd.get('https://www.glassdoor.ca/Reviews/index.htm')
     time.sleep(7)
+    
+    ## Clicking the sign-in button. 
     wd.find_element_by_link_text('Sign In').click()
     time.sleep(5)
+    
+    ## Passing the username and password to the sign-in dialogue box and clicking submit. 
+    
     wd.find_element_by_name("username").send_keys('harpreet.s.paul@outlook.com')
     time.sleep(2)
     wd.find_element_by_name("password").send_keys('happy23!')
@@ -37,21 +45,21 @@ def scrape_glassdoor_company_info(company_names):
     wd.find_element_by_name("submit").click()
     
     i = 1
+    
+    ## Iteratively scraping each company in company_names.
 
     for company in company_names:
         
         time.sleep(10)
         
+        ## Initializing empty dictionary within which company info for each company will be stored. 
+        
         company_info = {}
     
-        #try:
-            #try:
-                #company_name_search_box = wd.find_element_by_id("sc.keyword")
-            #except:
-                #company_name_search_box = wd.find_element_by_name("sc.keyword")
-        #except:
-            #company_name_search_box = wd.find_element_by_xpath("//*[@id='sc.keyword']")
-            
+        
+        ## Finding the company name search box and entering in the company name to be searched. 
+        ## Two different possible HTML elements corresponding to the company name search box are searched for since the element inexplicably varies from instance to instance. 
+        
         try:
             company_name_search_box = WebDriverWait(wd, 20).until(EC.presence_of_element_located((By.ID, "sc.keyword")))
             time.sleep(2)
@@ -65,11 +73,8 @@ def scrape_glassdoor_company_info(company_names):
             time.sleep(2)
             company_name_search_box.send_keys(company)
             
+        ## Trying to clear the location search box.
                
-        #company_name_search_box.clear()
-
-        #company_name_search_box.send_keys(company)
-        
         try:
             location_search_box = wd.find_element_by_xpath("//*[@id='sc.location']")
             time.sleep(2)
@@ -77,64 +82,78 @@ def scrape_glassdoor_company_info(company_names):
         except:
             pass
         
+        ## Clicking the search button to search for the entered company name. 
+        
         search_button = wd.find_element_by_xpath('//*[@id="scBar"]/div/button')
         time.sleep(2)
         search_button.click() 
+        
+        ## Checking if searching for a company name leads to a page of multiple search results. 
     
         if wd.current_url.startswith('https://www.glassdoor.ca/Reviews'):
+            
+            ## If so, the first search result is clicked. 
         
             try:
                 first_search_result = WebDriverWait(wd, 5).until(EC.presence_of_element_located((By.XPATH, '//div[@class = "single-company-result module "][1]//a[1]')))
                 link = first_search_result.get_attribute('href')
                 time.sleep(3)
                 wd.get(link)
+                
+            ## If no results are found, then the company is skipped and the next company name is searched. 
         
             except:
                 print (company + ' not found')
                 continue
         
+        ## At this point, we're on the company info page. 
+        
+        
         company_info['company'] = company
-    
-        #try:
-            #headquarters = wd.find_element_by_xpath('//div[@class="infoEntity"][2]/span').text
-            #company_info['headquarters'] = headquarters
-        #except:
-            #company_info['headquarters'] = -1
-            
-        #time.sleep(2)
         
-        #try:
-            #company_size = wd.find_element_by_xpath('//div[@class="infoEntity"][3]/span').text
-            #company_info['company_size'] = company_size
-        #except:
-            #company_info['company_size'] = -1
+        ## Headquarters, company size, company type, industry, revenue, company rating, recommend to a friend rating, ceo approval and interview difficulty rating are scraped. 
         
-        #time.sleep(2)
+        ## A default value of -1 is set for any unfound elements on the company info page. 
     
-        #try:
-            #company_type = wd.find_element_by_xpath('//div[@class="infoEntity"][5]/span').text
-            #company_info['company_type'] = company_type
-        #except:
-            #company_info['company_type'] = -1
+        try:
+            headquarters = wd.find_element_by_xpath('//div[@class="infoEntity"][2]/span').text
+            company_info['headquarters'] = headquarters
+        except:
+            company_info['headquarters'] = -1
             
-        #time.sleep(2)
+        time.sleep(2)
+        
+        try:
+            company_size = wd.find_element_by_xpath('//div[@class="infoEntity"][3]/span').text
+            company_info['company_size'] = company_size
+        except:
+            company_info['company_size'] = -1
+        
+        time.sleep(2)
     
-        #try:
-            #industry = wd.find_element_by_xpath('//div[@class="infoEntity"][6]/span').text
-            #company_info['industry'] = industry
-        #except:
-            #company_info['industry'] = -1
+        try:
+            company_type = wd.find_element_by_xpath('//div[@class="infoEntity"][5]/span').text
+            company_info['company_type'] = company_type
+        except:
+            company_info['company_type'] = -1
             
-        #time.sleep(2)
+        time.sleep(2)
     
-        #try:
-            #revenue = wd.find_element_by_xpath('//div[@class="infoEntity"][8]/span').text
-            #revenue = wd.find_element_by_xpath('//div[@class="infoEntity"][7]/span').text
-            #company_info['revenue'] = revenue
-        #except:
-            #company_info['revenue'] = -1
+        try:
+            industry = wd.find_element_by_xpath('//div[@class="infoEntity"][6]/span').text
+            company_info['industry'] = industry
+        except:
+            company_info['industry'] = -1
             
-        #time.sleep(2)
+        time.sleep(2)
+    
+        try:
+            revenue = wd.find_element_by_xpath('//div[@class="infoEntity"][8]/span').text
+            company_info['revenue'] = revenue
+        except:
+            company_info['revenue'] = -1
+            
+        time.sleep(2)
     
         try:
             company_rating = wd.find_element_by_xpath('//*[@id="EmpStats"]/div/div[1]/div/div/div').text
@@ -165,12 +184,16 @@ def scrape_glassdoor_company_info(company_names):
             company_info['interview_difficulty'] = interview_difficulty
         except:
             company_info['interview_difficulty'] = -1
+            
+        ## Dictionary of company info for a particular company is appended to the all_companies_info list. 
         
         all_companies_info.append(company_info)
         
         print ("finished scraping company # " + str(i))
         
         i += 1
+        
+        ## Navigating back to the company search page. 
         
         wd.back()
         
