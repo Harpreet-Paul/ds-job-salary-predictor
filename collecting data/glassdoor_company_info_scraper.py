@@ -38,9 +38,9 @@ def scrape_glassdoor_company_info(company_names):
     
     ## Passing the username and password to the sign-in dialogue box and clicking submit. 
     
-    wd.find_element_by_name("username").send_keys('harpreet.s.paul@outlook.com')
+    wd.find_element_by_name("username").send_keys('some username')
     time.sleep(2)
-    wd.find_element_by_name("password").send_keys('happy23!')
+    wd.find_element_by_name("password").send_keys('some password')
     time.sleep(2)
     wd.find_element_by_name("submit").click()
     
