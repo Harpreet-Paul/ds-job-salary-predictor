@@ -6,7 +6,7 @@ The data science job salary predictor is a web application that allows data scie
 
 ## How to Use
 
-| :point_right:        | **Access the app here:** [Job Salary Predictor](http://35.203.34.78:5000/)   |
+| :point_right:        | **Access the app here:** [Job Salary Predictor](http://34.95.60.85:5000/)   |
 |---------------|:------------------------|
 
 Note: The job salary predictor is only usable with job postings from the US, Canada, Scotland, Ireland or England.
